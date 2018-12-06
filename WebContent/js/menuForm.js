@@ -2,6 +2,9 @@
  * 
  */
 $(document).ready(function() {
+	$(".coffee").show();
+	$(".ade").hide();
+	$(".ice").hide();
 	//파일 업로드시 미리보기
 	var menuImg;
 	$("#file1").change(function(){

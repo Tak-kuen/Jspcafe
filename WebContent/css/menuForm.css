@@ -2,6 +2,7 @@
 /* 주문리스트 박스 안  메뉴박스 */
 
 .coffee, .ade, .ice{
+	display:none;
 	position: relative;
 	float:left;
 	border: 1px solid;

@@ -211,7 +211,7 @@ public class MngrDBBean {
 	
 	
 	
-	public void updateMenuimg(String filename, String menu_name) {
+	public void updateMenuImg(String filename, String menu_name) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -228,7 +228,23 @@ public class MngrDBBean {
 		}
 	}
 	
-	public void insertMenu() {
+	public void insertMenu(String filename, String menu_name,int menu_price) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("insert into menu(menu_name,menu_price,menu_image,menu_ctgr) values(?,?,?,?)");
+			pstmt.setString(3, "/"+filename);
+			pstmt.setString(1, menu_name);
+			pstmt.setInt(2, menu_price);
+			pstmt.setInt(4, 1);
+			pstmt.executeUpdate();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
 		
 	}
 }

@@ -1,17 +1,20 @@
 package coffee.command;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import java.util.*;
-import java.io.*;
 
 import coffee.bean.MenuBean;
 import coffee.bean.MngrDBBean;
 
-public class ImageUploadAction implements CommandAction {
+public class MenuInsertAction implements CommandAction{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
@@ -21,6 +24,7 @@ public class ImageUploadAction implements CommandAction {
 		String encType = "utf-8";
 		String filename = null;
 		String menuName ="";
+		int menuPrice = 0;
 		int maxSize = 5 * 1024 * 1024;
 
 		ServletContext context = request.getServletContext();
@@ -38,7 +42,14 @@ public class ImageUploadAction implements CommandAction {
 					String value = upload.getParameter(name);
 					menuName = value;
 				}
+				if(name.equals("priceText")) {
+					String value = upload.getParameter(name);
+					System.out.println(value);
+					menuPrice = Integer.parseInt(value);
+				}
 			}
+			System.out.println(menuName);
+			System.out.println(menuPrice+"");
 			// input 타입이 파일이 아닌 파라미터들을 얻어냄
 			Enumeration<?> files = upload.getFileNames();
 			// input 타입이 파일인 파라미터들의 정보 얻어냄
@@ -51,9 +62,8 @@ public class ImageUploadAction implements CommandAction {
 				if (file != null) {
 				} // if(file!=null)
 			} // while input type="file"
-			System.out.println(menuName);
 			MngrDBBean dbPro = MngrDBBean.getInstance();
-			dbPro.updateMenuImg(filename, menuName);
+			dbPro.insertMenu(filename, menuName,menuPrice);
 			ArrayList<MenuBean> list = new ArrayList<>();
 			list = dbPro.getMenuList();
 			request.getSession().setAttribute("menus", list);
@@ -61,6 +71,8 @@ public class ImageUploadAction implements CommandAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return "/mngr/menu/menuForm.jsp";
 	}
+
 }
