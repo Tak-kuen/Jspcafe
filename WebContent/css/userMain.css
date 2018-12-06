@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* 적립금 보유내역 창 */
+#information{
+	position:absolute;
+	z-index: 1;
+  	background: #FFFFFF;
+ 	width: 500px;
+ 	height: 300px;
+ 	left:30px;
+ 	top:120px;
+ 	margin:auto;
+ 	padding: 45px;
+ 	text-align: center;
+ 	font-size: 35px;
+ 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.info_name{
+	font-weight: bolder;
+	font-size: 55px;
+}
+.info_mile{
+	font-weight: bolder;
+	font-size: 55px;
+}
+
+/* 고객 메인 메뉴 적립내역 버튼 */
+#infobutton button{
+	position:relative;
+	top:50px;
+	float:center;
+	width:500px;
+	height:40px;
+	color: #ffffff;
+	cursor: pointer;
+	border: 0px;
+	transition-duration: 0.3s;
+	outline:none;
+}
+#infobutton button:hover{
+	color: #000000;
+	font-weight: bolder;
+	border: 4px solid #000000;
+}
