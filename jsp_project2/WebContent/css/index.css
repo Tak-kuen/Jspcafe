@@ -1,0 +1,126 @@
+@charset "UTF-8";
+body{
+	background-color: #D1C2B1;
+}
+
+
+/* 카페 타이틀 */
+body #title{
+	position:absolute;
+	text-align: center;
+	margin-top:2%;
+	left:45%;
+	color: #5a311a;
+	font-size: 45px;
+	font-family: fantasy;
+}
+#header {
+	position:fixed;
+	left:0; top:0; right:0;
+	height:100px;
+	border-radius: 0px;
+	border: 1px solid #000000;
+	
+}
+#nav {
+	position:fixed;
+	left:0;top:185px;bottom:0;
+	width:100px;
+	
+}
+#nav dl{
+	margin:0px;
+}
+#nav button{
+	position:relative;
+	right:0px;
+	width: 55px;
+	height: 87px;
+	background-color: transparent;
+	color: #ffffff;
+	cursor: pointer;
+	border: 0px;
+	margin:0px;
+	transition-duration: 0.3s;
+	text-align: center;
+	outline:none;
+}
+#nav button:hover{
+	border-bottom: 4px solid #ffffff;
+	padding: 10px 0;
+}
+#menusection{
+	width: 100px;
+	position:fixed;
+	background-color: #5a311a;
+}
+#content{
+	position:absolute;
+	margin-top:150px;
+	margin-left:150px;
+}
+.category{
+	height:50px;
+	width:540px;
+}
+
+.category ul li {
+	list-style:none;
+	color:white;
+	background-color:#2d2d2d;
+	float:left;
+	line-height:30px;
+	vertical-align:middle;
+	text-align:center;
+}
+
+.category .menuLink {
+	color:white;
+	display:block;
+	width:166.5px;
+	font-size:12px;
+	font-weight:bold;
+	font-family:"Trebuchet MS", Dotum,Arial;
+}
+
+.category .menuLink:hover{
+	color:red;
+	background-color:#4d4d4d;
+}
+img {
+	width:100px;
+	height:100px;
+}
+/* 주문리스트 박스 */
+#orderlist{
+	position: fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:500px;
+	height: 500px;
+	top:200px;
+	left:198px;
+	padding-top:20px;
+	background-color: white;
+}
+
+/* 주문리스트 박스 안  메뉴박스 */
+.coffee, .ade, .ice{
+	position: relative;
+	float:left;
+	border: 1px solid;
+	width:29%;
+	height:35%;
+	text-align: center;
+	margin-top: 1%;
+	margin-left: 3%;
+}
+#paymentlist {
+	position:fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:300px;
+	height: 500px;
+	top:200px;
+	left:715px;
+	padding-top:20px;
+	background-color: white;
+}
