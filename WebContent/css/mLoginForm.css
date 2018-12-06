@@ -1,0 +1,68 @@
+@charset "UTF-8";
+/* 로그인 박스 */
+.status{
+	position:absolute;
+	z-index: 1;
+  	background: #FFFFFF;
+ 	width: 320px;
+ 	height: 180px;
+ 	left:50%;
+ 	top:30%;
+ 	margin-left:-180px;
+ 	maring-top:-180px;
+ 	padding: 45px;
+ 	text-align: left;
+ 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+/* 로그인 제목 */
+.status h1{
+	margin-left:35%;
+	margin-bottom:30px;
+}
+
+/* 로그인 버튼 */
+#login {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  position: relative; 
+  left: 30px;
+  bottom: 25px;
+  background: #c3c3c3;
+  width: 90px;
+  height: 62px;
+  border: 0px solid #000000;
+  border-radius: 12px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+body ul#successlogin{
+	position: relative;
+	margin: auto;
+	text-align: right;
+}
+.label {
+	display:inline-block;
+	margin-right:3px;
+}
+
+/* 로그인하고나서 로그아웃 창 */
+.status2 {
+	position:fixed;
+	right:5px;
+	top:105px;
+	z-index: 1;
+  	background: #FFFFFF;
+  	padding: 20px 20px 20px 1px;
+  	
+ 	text-align: left;
+ 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+/* li */
+li {
+	list-style:none;
+}
