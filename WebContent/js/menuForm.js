@@ -91,11 +91,16 @@ $(document).ready(function() {
 				menu_ctgr:$('#ctgrText').val()
 		}
 		
-//		if(inserted==true) {
-//			$.ajax({
-//				
-//			});
-//		}
+		if(inserted==true) {
+			$.ajax({
+				type:"post",
+				url:"/jsp_project/mg/cafe/",
+				data:query,
+				success:function(data) {
+					
+				}
+			});
+		}
 	});
 	
 });
