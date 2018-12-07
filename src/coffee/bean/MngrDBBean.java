@@ -132,7 +132,6 @@ public class MngrDBBean {
 			while(rs.next()) {
 				bean=new MenuBean();
 				bean.setMenu_ctgr(rs.getInt("menu_ctgr"));
-				bean.setMenu_code(rs.getString("menu_code"));
 				bean.setMenu_name(rs.getString("menu_name"));
 				bean.setMenu_price(rs.getInt("menu_price"));
 				bean.setMenu_image(rs.getString("menu_image"));
@@ -192,6 +191,7 @@ public class MngrDBBean {
 				sbean=new StaffListBean();
 				sbean.setAdmin_id(rs.getString("admin_id"));
 				sbean.setAdmin_pass(rs.getString("admin_pass"));
+				sbean.setAdmin_name(rs.getString("admin_name"));
 				sbean.setAdmin_regdate(rs.getTimestamp("admin_regdate"));
 				sbean.setAdmin_class(rs.getInt("admin_class"));
 				sbean.setAdmin_addr(rs.getString("admin_addr"));
@@ -211,14 +211,17 @@ public class MngrDBBean {
 	
 	
 	
-	public void updateMenuImg(String filename, String menu_name) {
+	public void updateMenuImg(MenuBean bean) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
 			conn=getConnection();
-			pstmt=conn.prepareStatement("update menu set menu_image=?  where menu_name=?");
-			pstmt.setString(1, "/"+filename);
-			pstmt.setString(2, menu_name);
+			pstmt=conn.prepareStatement("update menu set menu_name=?,menu_price=?,menu_image=?,menu_ctgr=?  where menu_name=?");
+			pstmt.setString(1, bean.getMenu_name());
+			pstmt.setInt(2, bean.getMenu_price());
+			pstmt.setString(3, "/"+bean.getMenu_image());
+			pstmt.setInt(4, bean.getMenu_ctgr());
+			pstmt.setString(5, bean.getMenu_name());
 			pstmt.executeUpdate();
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -228,16 +231,16 @@ public class MngrDBBean {
 		}
 	}
 	
-	public void insertMenu(String filename, String menu_name,int menu_price) {
+	public void insertMenu(MenuBean bean) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
 			conn=getConnection();
 			pstmt=conn.prepareStatement("insert into menu(menu_name,menu_price,menu_image,menu_ctgr) values(?,?,?,?)");
-			pstmt.setString(3, "/"+filename);
-			pstmt.setString(1, menu_name);
-			pstmt.setInt(2, menu_price);
-			pstmt.setInt(4, 1);
+			pstmt.setString(1, bean.getMenu_name());
+			pstmt.setInt(2, bean.getMenu_price());
+			pstmt.setString(3, "/"+bean.getMenu_image());
+			pstmt.setInt(4, bean.getMenu_ctgr());
 			pstmt.executeUpdate();
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -246,5 +249,20 @@ public class MngrDBBean {
 			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
 		}
 		
+	}
+	public void deleteMenu(String menu_name) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("delete from menu where menu_name=?");
+			pstmt.setString(1,menu_name);
+			pstmt.executeUpdate();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
 	}
 }

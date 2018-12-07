@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.stfHidden {
+	display:none;
+}
+.stfInfo img{
+	width:100%;
+}
+.staff{
+	position:relative;
+	float:left;
+	border:1px solid;
+	width:29%;
+	height:30%;
+	text-align:center;
+	margin-top:1%;
+	margin-left:3%;
+	margin-bottom:1%;
+	padding-top:5%;
+}
+#stfList {
+	position: fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:500px;
+	height:500px;
+	top:200px;
+	left:198px;
+	padding-top:20px;
+	background-color: white;
+}
+#stfEdit {
+	position:fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:300px;
+	height: 500px;
+	top:200px;
+	left:715px;
+	padding-top:20px;
+	background-color: white;
+}
+#stfInfo{
+	width:100%;
+	height:60%;
+}
+#form{
+	width:100%;
+	height:30%;
+}
+div.stfRight {
+	margin-top:20px;
+	width:110px;
+	height:110px;
+}

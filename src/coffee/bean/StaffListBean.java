@@ -46,7 +46,14 @@ public class StaffListBean {
    public void setAdmin_profile(String admin_profile) {
       this.admin_profile = admin_profile;
    }
-   private String admin_pass;
+   private String admin_name;
+   public String getAdmin_name() {
+	return admin_name;
+}
+public void setAdmin_name(String admin_name) {
+	this.admin_name = admin_name;
+}
+private String admin_pass;
    private Timestamp admin_regdate;
    private int admin_class;
    private String admin_addr;

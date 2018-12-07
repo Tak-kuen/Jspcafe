@@ -34,22 +34,6 @@ public class MenuInsertAction implements CommandAction{
 
 			// 파일 업로드를 수행하는 MultipartRequest 객체 생성
 			upload = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
-
-			Enumeration<?> params = upload.getParameterNames();
-			while (params.hasMoreElements()) {
-				String name = (String) params.nextElement();
-				if(name.equals("nameText")) {
-					String value = upload.getParameter(name);
-					menuName = value;
-				}
-				if(name.equals("priceText")) {
-					String value = upload.getParameter(name);
-					System.out.println(value);
-					menuPrice = Integer.parseInt(value);
-				}
-			}
-			System.out.println(menuName);
-			System.out.println(menuPrice+"");
 			// input 타입이 파일이 아닌 파라미터들을 얻어냄
 			Enumeration<?> files = upload.getFileNames();
 			// input 타입이 파일인 파라미터들의 정보 얻어냄
@@ -62,8 +46,18 @@ public class MenuInsertAction implements CommandAction{
 				if (file != null) {
 				} // if(file!=null)
 			} // while input type="file"
+			
+			String menu_name=upload.getParameter("menu_name");
+			String menu_price=upload.getParameter("menu_price");
+			int menu_ctgr=Integer.parseInt(upload.getParameter("menu_ctgr"));
+			MenuBean bean=new MenuBean();
+			bean.setMenu_ctgr(menu_ctgr);
+			bean.setMenu_image(filename);
+			bean.setMenu_name(menu_name);
+			bean.setMenu_price(Integer.parseInt(menu_price));
+			
 			MngrDBBean dbPro = MngrDBBean.getInstance();
-			dbPro.insertMenu(filename, menuName,menuPrice);
+			dbPro.insertMenu(bean);
 			ArrayList<MenuBean> list = new ArrayList<>();
 			list = dbPro.getMenuList();
 			request.getSession().setAttribute("menus", list);
@@ -71,7 +65,6 @@ public class MenuInsertAction implements CommandAction{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "/mngr/menu/menuForm.jsp";
 	}
 
