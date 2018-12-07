@@ -50,10 +50,11 @@ public class StaffUpdateAction implements CommandAction {
 			bean.setAdmin_pass(upload.getParameter("admin_pass"));
 			bean.setAdmin_name(upload.getParameter("admin_name"));
 			bean.setAdmin_addr(upload.getParameter("admin_addr"));
+			bean.setAdmin_num(upload.getParameter("admin_num"));
 			bean.setAdmin_id(upload.getParameter("admin_id"));
 			bean.setAdmin_profile(filename);
 			MngrDBBean dbPro = MngrDBBean.getInstance();
-			dbPro.insertStfInfo(bean);
+			dbPro.updateStfInfo(bean);
 			ArrayList<StaffListBean> list = new ArrayList<>();
 			list = dbPro.getstaffList();
 			request.getSession().setAttribute("stafflists", list);

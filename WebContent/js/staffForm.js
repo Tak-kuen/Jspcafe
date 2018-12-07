@@ -36,7 +36,6 @@ $(document).ready(function() {
 		var admin_profile=tg.find('> .stfInfo:eq(5) > img');
 		var admin_name=tg.find('> .stfInfo:eq(6)');
 		
-		console.log(admin_profile.attr('src'));
 		$('#admin_id').val(admin_id.text());
 		$('#admin_pass').val(admin_pass.text());
 		$('#admin_regdate').val(admin_regdate.text());
@@ -45,8 +44,8 @@ $(document).ready(function() {
 		$('#admin_name').val(admin_name.text());
 		$('#stfImg > .stfRight').empty();
 		$('#stfImg > .stfRight').append('<img src="' +admin_profile.attr('src') + '"/>');
-		console.log($('#stfImg > .stfRight').html());
 	}
+	
 	$("#update").click(function() {
 		var updated = confirm("수정하시겠습니까?");
 		if(updated==true) {
@@ -73,6 +72,7 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
 	$('#insert').click(function() {
 		var inserted=confirm("등록하시겠습니까?");
 		
@@ -98,6 +98,35 @@ $(document).ready(function() {
 					location.href="/jsp_project/mg/staff/staffForm.do"
 				}
 			});
+		}
+	});
+	$('#delete').click(function() {
+		var deleted=confirm("정말 삭제하시겠습니까?");
+		
+		if(deleted==true) {
+			var query= {
+					admin_id:$('#admin_id').val()
+			}
+			$.ajax({
+				type:"post",
+				url:"/jsp_project/mg/staff/staffDelete.do",
+				data:query,
+				success:function(data) {
+					location.href="/jsp_project/mg/staff/staffForm.do"
+				}
+			});
+		}
+	});
+	$('#cancel').click(function() {
+		var canceled=confirm("취소하시겠습니까?");
+		if(canceled==true) {
+			$('#admin_id').val("");
+			$('#admin_pass').val("");
+			$('#admin_regdate').val("");
+			$('#admin_addr').val("");
+			$('#admin_num').val("");
+			$('#admin_name').val("");
+			$('#stfImg > .stfRight').empty();
 		}
 	});
 	
