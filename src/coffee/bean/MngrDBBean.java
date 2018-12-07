@@ -265,4 +265,49 @@ public class MngrDBBean {
 			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
 		}
 	}
+	
+	public void updateStfInfo(StaffListBean bean) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("update admin set admin_id=?,"
+					+ "admin_pass=?,admin_name=?,admin_addr=?,admin_profile=?,"
+					+ "admin_class=2  where admin_id=?");
+			pstmt.setString(1, bean.getAdmin_id());
+			pstmt.setString(2, bean.getAdmin_pass());
+			pstmt.setString(3,bean.getAdmin_name());
+			pstmt.setString(4, bean.getAdmin_addr());
+			pstmt.setString(5,"/" + bean.getAdmin_profile());
+			pstmt.setString(6, bean.getAdmin_id());
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	public void insertStfInfo(StaffListBean bean) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("insert into admin(admin_id,admin_pass,admin_name,admin_addr,admin_class,");
+			pstmt.setString(1, bean.getAdmin_id());
+			pstmt.setString(2, bean.getAdmin_pass());
+			pstmt.setString(3,bean.getAdmin_name());
+			pstmt.setString(4, bean.getAdmin_addr());
+			pstmt.setString(5,"/" + bean.getAdmin_profile());
+			pstmt.setString(6, bean.getAdmin_id());
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	
+	
 }

@@ -47,5 +47,60 @@ $(document).ready(function() {
 		$('#stfImg > .stfRight').append('<img src="' +admin_profile.attr('src') + '"/>');
 		console.log($('#stfImg > .stfRight').html());
 	}
+	$("#update").click(function() {
+		var updated = confirm("수정하시겠습니까?");
+		if(updated==true) {
+			var formData = new FormData();
+			formData.set("admin_id",$("#admin_id").val());
+			formData.set("admin_pass",$("#admin_pass").val());
+			formData.set("admin_regdate",$('#admin_regdate').val());
+			formData.set("admin_addr",$("#admin_addr").val());
+			formData.set("admin_num",$("#admin_num").val());
+			formData.set("admin_name",$('#admin_name').val());
+			formData.set("admin_profile",$("#file1")[0].files[0]);
+			
+			$.ajax({
+				type:"post",
+				url:"/jsp_project/mg/staff/staffUpdate.do",
+				data:formData,
+				enctype:"multipart/form-data",
+				processData:false,
+				contentType:false,
+				dataType:'text',
+				success:function(data) {
+					location.href="/jsp_project/mg/staff/staffForm.do";
+				}
+			});
+		}
+	});
+	$('#insert').click(function() {
+		var inserted=confirm("등록하시겠습니까?");
+		
+		if(inserted==true) {
+			var formData = new FormData();
+			formData.set("admin_id",$("#admin_id").val());
+			formData.set("admin_pass",$("#admin_pass").val());
+			formData.set("admin_regdate",$('#admin_regdate').val());
+			formData.set("admin_addr",$("#admin_addr").val());
+			formData.set("admin_num",$("#admin_num").val());
+			formData.set("admin_name",$('#admin_name').val());
+			formData.set("admin_profile",$("#file1")[0].files[0]);
+			
+			$.ajax({
+				type:"post",
+				url:"/jsp_project/mg/staff/staffInsert.do",
+				data:formData,
+				enctype:"multipart/form-data",
+				processData:false,
+				contentType:false,
+				dataType:'text',
+				success:function(data) {
+					location.href="/jsp_project/mg/staff/staffForm.do"
+				}
+			});
+		}
+	});
+	
+	
 	
 });

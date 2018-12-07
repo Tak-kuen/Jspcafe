@@ -50,6 +50,11 @@
 						name="admin_num" maxlength="10" size="10" /> <span
 						class="stfRight"></span>
 				</div>
+				<div id="stfName">
+					<span class="stfLeft">이름</span> <input type="text" id="admin_name"
+						name="admin_name" maxlength="10" size="10" /> <span
+						class="stfRight"></span>
+				</div>
 				<div id="stfRegDate">
 					<span class="stfLeft">등록일</span> <input type="text" id="admin_regdate"
 						name="admin_regdate" maxlength="21" size="17" /> <span
