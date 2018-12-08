@@ -12,7 +12,6 @@
 			<div class="cusInfo">${customer.cus_num}</div>
 			<div class="cusInfo">${customer.cus_name}</div>
 			<div class="cusInfo">${customer.cus_mile}</div>
-			<div class="cusInfo">${customer.cus_regdate}</div>
 		</div>
 	</c:forEach>
 </div>
@@ -36,9 +35,6 @@
 				<span class="cusRight"></span>
 			</div>
 			<div id="cusRegDate">
-				<span class="cusLeft">등록일</span>
-				<input type="text" id="cus_regdate" name="cus_regdate" maxlength="21" size="17" />
-				<span class="cusRight"></span>
 			</div>
 		</div>
 		<div id="cusBtn">

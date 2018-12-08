@@ -21,9 +21,9 @@
 <div id="nav">
 	<c:if test="${not empty sessionScope.id}">
 		<c:if test="${sessionScope.type==0 }">
-		<c:if test="${sessionScope.check ==2 }">
+			<c:if test="${sessionScope.check ==2 }">
 			
-			<ul id="menusection">
+				<ul id="menusection">
 				<dl><button id="menu">메뉴<br>관리</button>
 				<dl><button id="mileage">적립금<br>관리</button>
 				<dl><button id="customer">고객<br>관리</button>

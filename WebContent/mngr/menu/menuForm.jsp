@@ -60,8 +60,6 @@
 			<span class="menuLeft">이미지</span><div class="menuRight"></div>
 		</div>
 	</div>
-	
-	
 	<div id="form">
 		<div class="imgUpdate">
 			<input type="file" id="file1" name="file1">

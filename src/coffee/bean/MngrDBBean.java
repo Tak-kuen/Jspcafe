@@ -23,6 +23,33 @@ public class MngrDBBean {
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/test");
 		return ds.getConnection();
 	}
+	public int getMile(String cus_num) {
+		int mile=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+	      
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("select cus_mile from customer where cus_num=?");
+			pstmt.setString(1, cus_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {	
+				mile=rs.getInt("cus_mile");
+			} else{//rs.next
+				mile=0;
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+	      }
+		
+		
+		return mile;
+	}
 	
 	public int userCheck(String id, String passwd) {
 		Connection conn=null;
@@ -190,7 +217,6 @@ public class MngrDBBean {
 				bean=new JSONObject();
 				bean.put("cus_num",rs.getString("cus_num"));
 				bean.put("cus_name",rs.getString("cus_name"));
-				bean.put("cus_regdate",rs.getTimestamp("cus_regdate"));
 				bean.put("cus_mile",rs.getInt("cus_mile"));
 				customer.add(bean);
 			}
