@@ -89,35 +89,35 @@ public class MngrDBBean {
 	}
 	
 	public int cusCheck(String num, String name) {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int x=-1;
-		
-		try {
-			conn=getConnection();
-			pstmt=conn.prepareStatement("select cus_num from customer where cus_name=?");
-			pstmt.setString(1, name);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				String dbnum=rs.getString("cus_num");
-				if(num.equals(dbnum)) {
-					x=1;
-				}else {
-					x=0;
-				}
-			}else {
-				x=-1;
-			}//rs.next
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}finally {
-			if(rs!=null) try {rs.close();} catch(SQLException ex) {}
-			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
-			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
-		}
-		return x;
-	}
+	      Connection conn=null;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      int x=-1;
+	      
+	      try {
+	         conn=getConnection();
+	         pstmt=conn.prepareStatement("select * from customer where cus_name=?");
+	         pstmt.setString(1, name);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            String dbnum=rs.getString("cus_num");
+	            if(num.equals(dbnum)) {
+	               x=1;
+	            }else {
+	               x=0;
+	            }
+	         }else {
+	            x=-1;
+	         }//rs.next
+	      } catch(Exception ex) {
+	         ex.printStackTrace();
+	      }finally {
+	         if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+	         if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+	         if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+	      }
+	      return x;
+	   }
 	
 //	public JSONArray getMenuList() {
 //		Connection conn=null;
