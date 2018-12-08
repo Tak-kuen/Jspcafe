@@ -16,7 +16,7 @@ $(document).ready(function() {
 		location.href="/jsp_project/mg/staff/staffForm.do";
 	});
 	$("#sales").click(function() {
-		location.href="/jsp_project/mg/managerMain.do";
+		location.href="/jsp_project/mg/sales/salesForm.do";
 	});
 	$("#main").click(function() {
 		location.href="/jsp_project/mg/managerMain.do";

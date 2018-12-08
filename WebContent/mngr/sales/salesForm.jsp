@@ -12,6 +12,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
 //  var slist = '${slist}';
 //  alert(slist);
@@ -34,6 +35,11 @@ $(document).ready(function() {
 });
 
 </script>
+<style>
+#lineChart{
+width:700px;
+}
+</style>
 </head>
 <body>
 <div>매출관리</div>
