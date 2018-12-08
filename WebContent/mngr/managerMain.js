@@ -38,4 +38,7 @@ $(document).ready(function() {
 		console.log(nameC.text());
 		console.log(numC);
 	}
+	$('#mileselect').click(function() {
+		console.log($('.paylists').html());
+	});
 });

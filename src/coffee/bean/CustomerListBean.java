@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 
 public class CustomerListBean {
    private String cus_num;
+   private String cus_name;
+   private Timestamp cus_regdate;
+   private int cus_mile;
 
    public String getCus_num() {
       return cus_num;
@@ -37,8 +40,6 @@ public class CustomerListBean {
       this.cus_mile = cus_mile;
    }
 
-   private String cus_name;
-   private Timestamp cus_regdate;
-   private int cus_mile;
+   
 
 }

@@ -21,18 +21,18 @@
 	<form id="cusForm1" method="post" enctype="multipart/form-data">
 		<div id="cusInfo">
 			<div id="cusNum">
-				<span class="cusNum">전화번호</span>
+				<span class="cusLeft">전화번호</span>
 				<input type="text" id="cus_num" name="cus_num" maxlength="10" size="10" />
 				<span class="cusRight"></span>
 			</div>
 			<div id="cusName">
 				<span class="cusLeft">이름</span>
-				<input type="text" id="cus_name" name="cus_name" maxlength="10" size="10" />
+				<input type="text" id="cus_name" name="cus_name" maxlength="5" size="5" />
 				<span class="cusRight"></span>
 			</div>
 			<div id="cusMile">
 				<span class="cusLeft">적립금</span>
-				<input type="text" id="cus_mile" name="cus_mile" maxlength="10" size="10" />
+				<input type="text" id="cus_mile" name="cus_mile" maxlength="5" size="5" />
 				<span class="cusRight"></span>
 			</div>
 			<div id="cusRegDate">

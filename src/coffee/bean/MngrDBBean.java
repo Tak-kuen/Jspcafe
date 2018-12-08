@@ -2,7 +2,8 @@ package coffee.bean;
 
 import java.sql.*;
 import java.util.ArrayList;
-import org.json.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.naming.*;
 import javax.sql.DataSource;
@@ -118,6 +119,34 @@ public class MngrDBBean {
 		return x;
 	}
 	
+//	public JSONArray getMenuList() {
+//		Connection conn=null;
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		JSONArray menu;
+//		JSONObject bean;
+//		menu=new JSONArray();
+//		try {
+//			conn=getConnection();
+//			pstmt=conn.prepareStatement("select * from menu");
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+//				bean=new JSONObject();
+//				bean.put("menu_ctgr",rs.getInt("menu_ctgr"));
+//				bean.put("menu_name",rs.getString("menu_name"));
+//				bean.put("menu_price",rs.getInt("menu_price"));
+//				bean.put("menu_image",rs.getString("menu_image"));
+//				menu.put(bean);
+//			}
+//		} catch(Exception ex) {
+//			ex.printStackTrace();
+//		}finally {
+//			if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+//			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+//			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+//		}
+//		return menu;
+//	}
 	public ArrayList<MenuBean> getMenuList() {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -147,24 +176,23 @@ public class MngrDBBean {
 		return menu;
 	}
 	
-	public ArrayList<CustomerListBean> getCustomerList() {
+	public JSONArray getCustomerList() {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		ArrayList <CustomerListBean> customer =null;
-		CustomerListBean cbean;
-		customer=new ArrayList<>();
+		JSONArray customer =new JSONArray();
+		JSONObject bean;
 		try {
 			conn=getConnection();
 			pstmt=conn.prepareStatement("select * from customer");
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				cbean=new CustomerListBean();
-				cbean.setCus_num(rs.getString("cus_num"));
-				cbean.setCus_name(rs.getString("cus_name"));
-				cbean.setCus_regdate(rs.getTimestamp("cus_regdate"));
-				cbean.setCus_mile(rs.getInt("cus_mile"));
-				customer.add(cbean);
+				bean=new JSONObject();
+				bean.put("cus_num",rs.getString("cus_num"));
+				bean.put("cus_name",rs.getString("cus_name"));
+				bean.put("cus_regdate",rs.getTimestamp("cus_regdate"));
+				bean.put("cus_mile",rs.getInt("cus_mile"));
+				customer.add(bean);
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -175,6 +203,34 @@ public class MngrDBBean {
 		}
 		return customer;
 	}
+//	public ArrayList<CustomerListBean> getCustomerList() {
+//		Connection conn=null;
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		ArrayList <CustomerListBean> customer =null;
+//		CustomerListBean cbean;
+//		customer=new ArrayList<>();
+//		try {
+//			conn=getConnection();
+//			pstmt=conn.prepareStatement("select * from customer");
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+//				cbean=new CustomerListBean();
+//				cbean.setCus_num(rs.getString("cus_num"));
+//				cbean.setCus_name(rs.getString("cus_name"));
+//				cbean.setCus_regdate(rs.getTimestamp("cus_regdate"));
+//				cbean.setCus_mile(rs.getInt("cus_mile"));
+//				customer.add(cbean);
+//			}
+//		} catch(Exception ex) {
+//			ex.printStackTrace();
+//		}finally {
+//			if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+//			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+//			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+//		}
+//		return customer;
+//	}
 	
 	public ArrayList<StaffListBean> getstaffList() {
 		Connection conn=null;
@@ -210,7 +266,7 @@ public class MngrDBBean {
 	}
 	
 	
-	
+	////메뉴관리 메소드
 	public void updateMenuImg(MenuBean bean) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -266,6 +322,8 @@ public class MngrDBBean {
 		}
 	}
 	
+	
+	////직원정보 관리 메소드
 	public void updateStfInfo(StaffListBean bean) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -318,6 +376,62 @@ public class MngrDBBean {
 			conn=getConnection();
 			pstmt=conn.prepareStatement("delete from admin where admin_id=?");
 			pstmt.setString(1, admin_id);
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	
+	
+	////고객정보 관리 메소드
+	public void insertCusInfo(CustomerListBean bean) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		bean.setCus_regdate(new Timestamp(System.currentTimeMillis()));
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("insert into customer values(?,?,?,?)");
+			pstmt.setString(1,bean.getCus_num());
+			pstmt.setString(2,bean.getCus_name());
+			pstmt.setTimestamp(3,bean.getCus_regdate());
+			pstmt.setInt(4, bean.getCus_mile());
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	
+	public void updateCusInfo(CustomerListBean bean) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("update customer set cus_name=?,cus_mile=? where cus_num=?");
+			pstmt.setString(1,bean.getCus_name());
+			pstmt.setInt(2, bean.getCus_mile());
+			pstmt.setString(3,bean.getCus_num());
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	
+	public void deleteCusInfo(CustomerListBean bean) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("delete from customer where cus_num=?");
+			pstmt.setString(1,bean.getCus_num());
 			pstmt.executeUpdate();
 		} catch(Exception ex) {
 			ex.printStackTrace();

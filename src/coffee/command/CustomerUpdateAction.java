@@ -1,13 +1,33 @@
 package coffee.command;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+
+import coffee.bean.CustomerListBean;
+import coffee.bean.MngrDBBean;
 
 public class CustomerUpdateAction implements CommandAction{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		return null;
+		request.setCharacterEncoding("utf-8");
+		CustomerListBean bean=new CustomerListBean();
+		System.out.println(request.getParameter("cus_mile"));
+		bean.setCus_num(request.getParameter("cus_num"));
+		bean.setCus_name(request.getParameter("cus_name"));
+		bean.setCus_mile(Integer.parseInt(request.getParameter("cus_mile")));
+		MngrDBBean dbPro = MngrDBBean.getInstance();
+		dbPro.updateCusInfo(bean);
+//		ArrayList<CustomerListBean> list=new ArrayList<>();
+		JSONArray list=new JSONArray();
+		list=dbPro.getCustomerList();
+		System.out.println(list.get(0));
+		request.getSession().setAttribute("customlists", list);
+		return "mngr/customer/customerForm.jsp";
 	}
 
 }
