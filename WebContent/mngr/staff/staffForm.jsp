@@ -5,8 +5,8 @@
 <script src="/jsp_project/js/staffForm.js"></script>
 <link rel="stylesheet" href="/jsp_project/css/staffForm.css"
 	type="text/css" />
-직원관리
 <div id="stfList">
+<h2>직원관리</h2>
 	<c:forEach var="staff" items="${stafflists}">
 		<c:if test="${staff.admin_class == 2}">
 			<div class="staff">
@@ -28,7 +28,7 @@
 	<form id="stfForm1" method="post" enctype="multipart/form-data">
 		<div id="stfInfo">
 			<div id="stfId">
-				<span class="stfLeft">아이디</span> <input type="text" id="admin_id"
+				<span class="stfLeft">아이디&nbsp;&nbsp;&nbsp;</span> <input type="text" id="admin_id"
 					name="admin_id" maxlength="15" size="10" value="" /> <span
 					class="stfRight"></span>
 			</div>
@@ -38,7 +38,7 @@
 					class="stfRight"></span>
 			</div>
 			<div id="stfAddr">
-				<span class="stfLeft">주소</span> <input type="text" id="admin_addr"
+				<span class="stfLeft">주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" id="admin_addr"
 					name="admin_addr" maxlength="10" size="10" /> <span
 					class="stfRight"></span>
 			</div>
@@ -48,12 +48,12 @@
 					class="stfRight"></span>
 			</div>
 			<div id="stfName">
-				<span class="stfLeft">이름</span> <input type="text" id="admin_name"
+				<span class="stfLeft">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" id="admin_name"
 					name="admin_name" maxlength="10" size="10" /> <span
 					class="stfRight"></span>
 			</div>
 			<div id="stfRegDate">
-				<span class="stfLeft">등록일</span> <input type="text"
+				<span class="stfLeft">등록일&nbsp;&nbsp;&nbsp;</span> <input type="text"
 					id="admin_regdate" name="admin_regdate" maxlength="21" size="17" />
 				<span class="stfRight"></span>
 			</div>

@@ -10,26 +10,27 @@
 	height:35%;
 	text-align: center;
 	margin-top: 1%;
-	margin-left: 3%;
+	margin-left: 2%;
 }
 #menuList {
+	text-align:center;
 	position: fixed;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-	width:500px;
-	height:500px;
+	width:480px;
+	height:480px;
 	top:200px;
 	left:198px;
-	padding-top:20px;
+	padding:10px;
 	background-color: white;
 }
 #menuUpdate {
 	position:fixed;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-	width:300px;
-	height: 500px;
+	width:280px;
+	height: 480px;
 	top:200px;
 	left:715px;
-	padding-top:20px;
+	padding:10px;
 	background-color: white;
 }
 #menuEdit {

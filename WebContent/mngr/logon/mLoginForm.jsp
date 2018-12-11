@@ -22,7 +22,7 @@
 	<c:if test="${not empty sessionScope.id }">
 		<div class="status2">
 			<ul id="successlogin">
-				<li>관리자 로그인 성공!!.. 작업중
+				<li>${sessionScope.id}님이 작업중
 				<button id="logout">로그아웃</button>
 			</ul>
 		</div>

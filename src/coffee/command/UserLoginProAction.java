@@ -21,8 +21,10 @@ public class UserLoginProAction implements CommandAction{
 		CustomerBean customer=dbPro.numCheck(num);
 		request.getSession().setAttribute("orderlists", dbPro.getOrderList(num));
 		request.getSession().setAttribute("customer", customer);
+		request.getSession().setAttribute("mileset", dbPro.getMileSet());
 		request.setAttribute("check", new Integer(check));
 		request.setAttribute("num", num);
+		request.setAttribute("name", name);
 		return "/user/logon/uLoginPro.jsp";
 	}
 

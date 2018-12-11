@@ -1,28 +1,56 @@
 @charset "UTF-8";
-#saveList {
+#saveTitle {
 	position: fixed;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-	width:500px;
-	height:500px;
-	top:200px;
-	left:198px;
-	padding-top:20px;
+	width:480px;
+	height:380px;
+	top:50%;
+	left:50%;
+	margin-top:-10%;
+ 	margin-left:-15%;
+	padding:10px;
 	background-color: white;
 	overflow:auto;
 }
+#saveTitle h2{
+	text-align:center;
+}
+
 .lists{
 	position:relative;
 	float:left;
-	width:20%;
+	width:22%;
 	hegiht:30px;
 	text-align:center;
 	margin-top:1%;
-	margin-left:1%;
+	margin-left:3%;
 	margin-bottom:1%;
 }
 .list:first-child{
-	width:10%;
+	width:15%;
 }
 .lists:last-child {
 	width:40%;
+}
+
+.colInfo2 {
+	width:25%;
+	text-align:center;
+	margin-top:1%;
+	margin-left:3%;
+	margin-bottom:1%;
+	hegiht:30px;
+	float:left;
+}
+.colInfo2:first-child {
+	width:15%;
+}
+.colInfo2:last-child{
+	width:40%;
+}
+#saveWrap{
+	width:100%;
+	height:70%;
+	border:2px solid black;
+	overflow:auto;
 }

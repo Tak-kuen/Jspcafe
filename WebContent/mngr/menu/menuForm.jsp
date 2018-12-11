@@ -11,6 +11,7 @@
 	</ul>
 </div>
 <div id="menuList">
+<h2>메뉴관리</h2>
 	<c:forEach var="menu" items="${sessionScope.menus}">
 		<c:if test="${menu.menu_ctgr == 1}">
 		<div class="coffee">
@@ -42,12 +43,12 @@
 	<form id="upForm1"  method="post" enctype="multipart/form-data">
 	<div id="menuEdit">
 		<div id="menuName">
-			<span class="menuLeft">메뉴명</span>
+			<span class="menuLeft">메뉴명&nbsp;&nbsp;&nbsp;</span>
 			<input type="text" id="nameText" name="nameText" maxlength="15" size="10" value=""/>
 			<span  class="menuRight"></span>
 		</div>
 		<div id="menuPrice">
-			<span class="menuLeft">가격</span>
+			<span class="menuLeft">가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<input type="text" id="priceText" name="priceText" maxlength="10" size="10" value=""/>
 			<span class="menuRight"></span>
 		</div>

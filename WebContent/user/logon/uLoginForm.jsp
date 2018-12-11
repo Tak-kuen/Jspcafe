@@ -13,8 +13,8 @@
 	<c:if test="${empty sessionScope.num}">
 		<div class="status">
 			<h1>Log-in</h1>
-			<span class="label">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><input id="name" name="name" type="text" size="20" maxlength="50"><br/>
-			<span class="label">전화번호</span><input id="num" name="num" type="text" size="20" maxlength="16">
+			<span class="label">&nbsp;&nbsp;이름&nbsp;&nbsp;&nbsp;&nbsp;</span><input id="name" name="name" type="text" size="20" maxlength="15"><br/>
+			<span class="label">전화번호</span><input id="num" name="num" type="text" size="20" maxlength="15">
 			<button id="login">로그인</button>
 		</div>
 		
@@ -22,7 +22,7 @@
 	<c:if test="${not empty sessionScope.num }">
 		<div class="status2">
 			<ul id="successlogin">
-				<li>손님 로그인 성공!!
+				<li>${sessionScope.name}님 로그인 환영합니다
 				<button id="logout">로그아웃</button>
 			</ul>
 		</div>

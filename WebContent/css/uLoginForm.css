@@ -46,13 +46,16 @@
 
 /* 로그인하고나서 로그아웃 창 */
 .status2 {
+	list-style:none;
 	position:fixed;
 	right:5px;
 	top:105px;
 	z-index: 1;
-  	background: #FFFFFF;
-  	padding: 20px 20px 20px 1px;
+  	padding: 5px;
   	
  	text-align: left;
- 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+ 	/* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
+}
+ul {
+	list-style:none;
 }

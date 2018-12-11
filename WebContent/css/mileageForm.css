@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#mileagemanagement {
+	position: fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:730px;
+	height: 480px;
+	top:200px;
+	left:198px;
+	padding-top:20px;
+	background-color: white;
+	padding:10px;
+}
+#mileagemanagement h2{
+	text-align:center;
+	margin-bottom:50px;
+}

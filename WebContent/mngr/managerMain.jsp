@@ -57,22 +57,22 @@
 					</c:forEach>
 				</div>
 				<div id="paymentlist" class="box">
-					<button id="orderReset">주문취소</button>
+					<div id="paymentTitle" style="width:42%; float:left; line-height:40px; padding-left:30%;">&nbsp;&nbsp;&nbsp;주문목록</div><button id="orderReset">주문취소</button>
 					<div class="paylists">
 						<c:if test="${not empty sessionScope.listHtml}">
 						${ listHtml}
 						</c:if>
 					</div>
 					<div id="member">
-						결제금액 <input id="paytext" readonly="readonly" disabled="disabled" value="${sum}">
+						결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="paytext"size="10" readonly="readonly" disabled="disabled" value="${sum}">
 						<div class="memberLogin" id="memp1" style="display: block">
-							<label>전화번호</label> <input type="text" id="m-phone">
+							<label>전화번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <input type="text" id="m-phone" size="10">
 						</div>
 						<div class="memberLogin" id="memp2" style="display: none">
-							<label>고객 명</label><input id="name" value="" type="text" readonly="readonly" disabled="disabled">
+							<label>고객 명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input id="name" value="" type="text"  size="10"readonly="readonly" disabled="disabled">
 							<div id="memeber-name"></div>
-							<label>잔여 포인트</label><input id="currentpoint" type="text" readonly="readonly" disabled="disabled"><br>
-							<label>사용할 포인트</label><input id="usepoint" type="text" value="">
+							<label>잔여 포인트&nbsp;&nbsp;&nbsp;</label><input id="currentpoint" type="text" readonly="readonly" disabled="disabled" size="10"><br>
+							<label>사용할 포인트</label><input id="usepoint" type="text" value="" size="10">
 							<button id="apply">적용</button>
 						</div>
 					</div>
@@ -120,6 +120,13 @@
 	 * 매니저 메인화면 버튼 핸들링
 	 */
 	$(document).ready(function() {
+		var mileRate;
+		if('${sessionScope.mileset.percent}' ==null) {
+			mileRate=0.1;
+		}else {
+			mileRate=Number('${sessionScope.mileset.percent}')/100;
+			console.log(mileRate);
+		}
 		var isMile = true;
 		var coffee=$('.coffee');
 		var ade=$('.ade');
@@ -235,7 +242,7 @@
 		   $('#pay').click(function() {
 				console.log(Number($('#paytext').val()));
 				var order_money=Number($('#paytext').val());
-				var cus_mile =order_money*0.1 + Number($('#currentpoint').val());
+				var cus_mile =order_money*mileRate + Number($('#currentpoint').val());
 				console.log(cus_mile);
 				console.log(typeof cus_mile);
 				var query={

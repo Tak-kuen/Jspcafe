@@ -40,13 +40,26 @@ $(document).ready(function() {
 
 </script>
 <style>
+#chartForm{
+	text-align:center;
+	position: fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:730px;
+	height: 480px;
+	top:200px;
+	left:198px;
+	background-color: white;
+	padding:10px;
+}
 #lineChart{
 width:700px;
 }
 </style>
 </head>
 <body>
-<div>매출관리</div>
+<div id="chartForm">
+<h2>매출관리</h2>
 <div id="lineChart"></div>
+</div>
 </body>
 </html>

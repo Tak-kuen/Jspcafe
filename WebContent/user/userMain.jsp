@@ -12,7 +12,7 @@
 			<span>원</span><br /> <span>보유 중 입니다.</span><br />
 		</div>
 		<div id="infobutton">
-			<button id="info_button">적립내역 보기</button>
+			<button id="info_button">주문내역 보기</button>
 		</div>
 	</div>
 </c:if>
