@@ -120,6 +120,7 @@
 	 * 매니저 메인화면 버튼 핸들링
 	 */
 	$(document).ready(function() {
+		var isMile = true;
 		var coffee=$('.coffee');
 		var ade=$('.ade');
 		var ice=$('.ice');
@@ -214,8 +215,8 @@
 		         var pay = $("#paytext").val();
 		         var sum = pay-upoint;
 		         $("#paytext").val(sum);
-		         $("#usepoint").val();
-		         $("#usepoint").val("");
+		         console.log($("#usepoint").val());
+		         $('#usepoint').val("");
 		      }
 		   });
 		   
@@ -232,9 +233,30 @@
 		   });
 		   
 		   $('#pay').click(function() {
-				var a=$('.paylists').html();
-				console.log(a);
-			   console.log("결제버튼"); 
+				console.log(Number($('#paytext').val()));
+				var order_money=Number($('#paytext').val());
+				var cus_mile =order_money*0.1 + Number($('#currentpoint').val());
+				console.log(cus_mile);
+				console.log(typeof cus_mile);
+				var query={
+						order_money:order_money,
+						admin_id: '${sessionScope.id}',
+						cus_mile: cus_mile,
+						cus_num:$('#m-phone').val()
+				};
+				
+			   console.log(query.admin_id);
+			   console.log(query.cus_num);
+			   console.log(query.cus_mile);
+				$.ajax({
+					type:"post",
+					url:"/jsp_project/mg/order/payPro.do",
+					data:query,
+					success:function(data) {
+						alert("결제가 되었습니다.");
+						location.href="/jsp_project/mg/managerMain.do";
+					}
+			   });
 		   });
 
 	});

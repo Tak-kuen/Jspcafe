@@ -18,6 +18,7 @@ public class ManagerLoginProAction implements CommandAction{
 		int check = dbPro.userCheck(id,passwd);
 		
 		HttpSession session = request.getSession();
+		session.setAttribute("mileset", dbPro.getMileSet());
 		session.setAttribute("menus", dbPro.getMenuList());
 		session.setAttribute("customlists", dbPro.getCustomerList());
 		session.setAttribute("stafflists", dbPro.getstaffList());

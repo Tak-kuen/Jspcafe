@@ -23,6 +23,37 @@ public class MngrDBBean {
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/test");
 		return ds.getConnection();
 	}
+	
+	public JSONArray getSales(String year) {
+		JSONArray sales=new JSONArray();
+		JSONObject bean=null;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=getConnection();
+			pstmt = conn.prepareStatement("select substring(order_date, 1, 7) as month, sum(order_money) as totalSales from orderlist where order_date like ? group by month");
+			pstmt.setString(1, year+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				bean=new JSONObject();
+				bean.put("month",rs.getString("month"));
+				bean.put("totalSales", Integer.parseInt(rs.getString("totalSales")));
+				sales.add(bean);
+			}
+			int a=sales.size();
+			System.out.println(a);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+	      }
+		return sales;
+	}
+	
+	
 	public int getMile(String cus_num) {
 		int mile=0;
 		Connection conn=null;
@@ -258,28 +289,27 @@ public class MngrDBBean {
 //		return customer;
 //	}
 	
-	public ArrayList<StaffListBean> getstaffList() {
+	public JSONArray getstaffList() {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		ArrayList <StaffListBean> staff =null;
-		StaffListBean sbean;
-		staff=new ArrayList<>();
+		JSONArray staff =new JSONArray();
+		JSONObject bean;
 		try {
 			conn=getConnection();
 			pstmt=conn.prepareStatement("select * from admin");
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				sbean=new StaffListBean();
-				sbean.setAdmin_id(rs.getString("admin_id"));
-				sbean.setAdmin_pass(rs.getString("admin_pass"));
-				sbean.setAdmin_name(rs.getString("admin_name"));
-				sbean.setAdmin_regdate(rs.getTimestamp("admin_regdate"));
-				sbean.setAdmin_class(rs.getInt("admin_class"));
-				sbean.setAdmin_addr(rs.getString("admin_addr"));
-				sbean.setAdmin_num(rs.getString("admin_num"));
-				sbean.setAdmin_profile(rs.getString("admin_profile"));
-				staff.add(sbean);
+				bean=new JSONObject();
+				bean.put("admin_id",rs.getString("admin_id"));
+				bean.put("admin_pass",rs.getString("admin_pass"));
+				bean.put("admin_name",rs.getString("admin_name"));
+				bean.put("admin_regdate",rs.getTimestamp("admin_regdate"));
+				bean.put("admin_class",rs.getInt("admin_class"));
+				bean.put("admin_addr",rs.getString("admin_addr"));
+				bean.put("admin_num",rs.getString("admin_num"));
+				bean.put("admin_profile",rs.getString("admin_profile"));
+				staff.add(bean);
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -290,7 +320,137 @@ public class MngrDBBean {
 		}
 		return staff;
 	}
+//	public ArrayList<StaffListBean> getstaffList() {
+//		Connection conn=null;
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		ArrayList <StaffListBean> staff =null;
+//		StaffListBean sbean;
+//		staff=new ArrayList<>();
+//		try {
+//			conn=getConnection();
+//			pstmt=conn.prepareStatement("select * from admin");
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+//				sbean=new StaffListBean();
+//				sbean.setAdmin_id(rs.getString("admin_id"));
+//				sbean.setAdmin_pass(rs.getString("admin_pass"));
+//				sbean.setAdmin_name(rs.getString("admin_name"));
+//				sbean.setAdmin_regdate(rs.getTimestamp("admin_regdate"));
+//				sbean.setAdmin_class(rs.getInt("admin_class"));
+//				sbean.setAdmin_addr(rs.getString("admin_addr"));
+//				sbean.setAdmin_num(rs.getString("admin_num"));
+//				sbean.setAdmin_profile(rs.getString("admin_profile"));
+//				staff.add(sbean);
+//			}
+//		} catch(Exception ex) {
+//			ex.printStackTrace();
+//		}finally {
+//			if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+//			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+//			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+//		}
+//		return staff;
+//	}
 	
+	//마일리지 설정정보 가져오긴
+	public JSONObject getMileSet() {
+		JSONObject mileset=null;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("select * from milelimit");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				mileset=new JSONObject();
+				mileset.put("uselimit", rs.getInt("uselimit"));
+				mileset.put("usemeasure", rs.getInt("usemeasure"));
+				mileset.put("percent", rs.getInt("percent"));
+				mileset.put("min_amt", rs.getInt("min_amt"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+		return mileset;
+	}
+	
+	public void setMileSet(JSONObject mileset) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		if(mileset.get("uselimit") instanceof String) {
+			System.out.println(mileset.get("uselimit"));
+		}
+		String uselimit=(String) mileset.get("uselimit");
+		String usemeasure=(String) mileset.get("usemeasure");
+		String percent=(String) mileset.get("percent");
+		String min_amt=(String) mileset.get("min_amt");
+		System.out.println(Integer.parseInt(uselimit));
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("update milelimit set uselimit=?, usemeasure=?,percent=?,min_amt=?");
+			pstmt.setInt(1, Integer.parseInt(uselimit));
+			pstmt.setInt(2, Integer.parseInt(usemeasure));
+			pstmt.setInt(3, Integer.parseInt(percent));
+			pstmt.setInt(4, Integer.parseInt(min_amt));
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+public void setMileSet(String rmin_amt, String rpercent, String ruselimit, String rusemeasure) {
+	Connection conn=null;
+	PreparedStatement pstmt=null;
+	System.out.println(rmin_amt+rpercent+rusemeasure+ruselimit);
+	try {
+		conn=getConnection();
+		pstmt=conn.prepareStatement("update milelimit set uselimit=?, usemeasure=?,percent=?,min_amt=?");
+		pstmt.setInt(1, Integer.parseInt(ruselimit));
+		pstmt.setInt(2, Integer.parseInt(rusemeasure));
+		pstmt.setInt(3, Integer.parseInt(rpercent));
+		pstmt.setInt(4, Integer.parseInt(rmin_amt));
+		pstmt.executeUpdate();
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	}finally {
+		if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+		if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+	}
+}
+public JSONArray getOrderList(String cus_num) {
+	JSONArray orderlist=new JSONArray();
+	JSONObject bean=null;
+	Connection conn=null;
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	try {
+		conn=getConnection();
+		pstmt=conn.prepareStatement("select * from orderlist where cus_num=?");
+		pstmt.setString(1, cus_num);
+		rs=pstmt.executeQuery();
+		while(rs.next()) {
+			bean=new JSONObject();
+			bean.put("order_money", rs.getInt("order_money"));
+			bean.put("cus_num", rs.getString("cus_num"));
+			bean.put("admin_id", rs.getString("admin_id"));
+			bean.put("order_date", rs.getTimestamp("order_date"));
+			orderlist.add(bean);
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	}finally {
+		if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+		if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		if(rs!=null) try {rs.close();} catch(SQLException ex) {}
+	}
+	return orderlist;
+}
 	
 	////메뉴관리 메소드
 	public void updateMenuImg(MenuBean bean) {
@@ -423,7 +583,7 @@ public class MngrDBBean {
 			pstmt.setString(1,bean.getCus_num());
 			pstmt.setString(2,bean.getCus_name());
 			pstmt.setTimestamp(3,bean.getCus_regdate());
-			pstmt.setInt(4, bean.getCus_mile());
+			pstmt.setInt(4, 0);
 			pstmt.executeUpdate();
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -466,6 +626,58 @@ public class MngrDBBean {
 			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
 		}
 	}
+	public void orderInsert(int order_money, String admin_id, String cus_num) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Timestamp a=new Timestamp(System.currentTimeMillis());
+		if(cus_num.equals("")) {
+			cus_num=null;
+		}
+		int count=0;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("select order_num from orderlist order by order_num desc");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt("order_num");
+				System.out.println(count);
+			}
+			System.out.println(admin_id);
+			System.out.println(cus_num);
+			pstmt=conn.prepareStatement("insert into orderlist values(?,?,?,?,?)");
+			pstmt.setInt(1,++count);
+			pstmt.setInt(2,order_money);
+			pstmt.setString(3, admin_id);
+			pstmt.setString(4, cus_num);
+			pstmt.setTimestamp(5,a);
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	public void mileUpdate(String cus_num, int cus_mile) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement("update customer set cus_mile=? where cus_num=?");
+			pstmt.setInt(1, cus_mile);
+			pstmt.setString(2,cus_num);
+			pstmt.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException ex) {}
+			if(conn!=null) try {conn.close();} catch(SQLException ex) {}
+		}
+	}
+	
+	
+	
 	
 	
 }

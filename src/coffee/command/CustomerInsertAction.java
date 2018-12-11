@@ -19,7 +19,6 @@ public class CustomerInsertAction implements CommandAction{
 		System.out.println(request.getParameter("cus_mile"));
 		bean.setCus_num(request.getParameter("cus_num"));
 		bean.setCus_name(request.getParameter("cus_name"));
-		bean.setCus_mile(Integer.parseInt(request.getParameter("cus_mile")));
 		MngrDBBean dbPro = MngrDBBean.getInstance();
 		dbPro.insertCusInfo(bean);
 //		ArrayList<CustomerListBean> list=new ArrayList<>();

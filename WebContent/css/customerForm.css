@@ -33,8 +33,5 @@
 }
 .cusInfo{
 	float:left;
-	width:15%;
-}
-.cusInfo:last-child{
-	width:50%;
+	width:30%;
 }

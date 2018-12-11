@@ -33,8 +33,10 @@
 	left:715px;
 	padding-top:20px;
 	background-color: white;
+	
 }
 .paylists {
+	overflow:auto;
 	height:60%;
 	border:1px solid black;
 }

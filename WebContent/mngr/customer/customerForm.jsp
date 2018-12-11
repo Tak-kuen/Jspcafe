@@ -21,7 +21,7 @@
 		<div id="cusInfo">
 			<div id="cusNum">
 				<span class="cusLeft">전화번호</span>
-				<input type="text" id="cus_num" name="cus_num" maxlength="10" size="10" />
+				<input type="text" id="cus_num" name="cus_num" maxlength="15" size="15" />
 				<span class="cusRight"></span>
 			</div>
 			<div id="cusName">

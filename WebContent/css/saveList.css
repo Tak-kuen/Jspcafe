@@ -1,0 +1,28 @@
+@charset "UTF-8";
+#saveList {
+	position: fixed;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	width:500px;
+	height:500px;
+	top:200px;
+	left:198px;
+	padding-top:20px;
+	background-color: white;
+	overflow:auto;
+}
+.lists{
+	position:relative;
+	float:left;
+	width:20%;
+	hegiht:30px;
+	text-align:center;
+	margin-top:1%;
+	margin-left:1%;
+	margin-bottom:1%;
+}
+.list:first-child{
+	width:10%;
+}
+.lists:last-child {
+	width:40%;
+}
